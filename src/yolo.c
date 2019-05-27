@@ -10,19 +10,19 @@
 #endif
 
 /* Change class number here */
-#define CLASSNUM 2
+#define CLASSNUM 1
 
 /* Change class names here */
-char *voc_names[] = {"stopsign", "yeildsign"};
+char *voc_names[] = {"evzones"};
 image voc_labels[CLASSNUM];
 
 void train_yolo(char *cfgfile, char *weightfile)
 {
     /* Change training folders here */
-    char *train_images = "BBoxLabelTool/train.txt";
+    char *train_images = "evzone_list.txt";
 
     /* Change output weight folders here */
-    char *backup_directory = "/u03/Guanghan/dev/darknet-master/backup/";
+    char *backup_directory = "backup/";
 
     srand(time(0));
     data_seed = time(0);
@@ -414,11 +414,11 @@ void demo_yolo(char *cfgfile, char *weightfile, float thresh, int cam_index, cha
 void run_yolo(int argc, char **argv)
 {
     int i;
-    for(i = 0; i < CLASSNUM; ++i){
-        char buff[256];
-        sprintf(buff, "data/labels/%s.png", voc_names[i]);
-        voc_labels[i] = load_image_color(buff, 0, 0);
-    }
+    // for(i = 0; i < CLASSNUM; ++i){
+    //     char buff[256];
+    //     sprintf(buff, "data/labels/%s.png", voc_names[i]);
+    //     voc_labels[i] = load_image_color(buff, 0, 0);
+    // }
 
     float thresh = find_float_arg(argc, argv, "-thresh", .2);
     int cam_index = find_int_arg(argc, argv, "-c", 0);
